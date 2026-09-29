@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cozy Haven • Animal Crossing Paradise</title>
+  <meta name="description" content="A cozy, Animal Crossing themed personal website with custom island passport, NookPhone apps, K.K. Slider jukebox, and sweet memories.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="weather-sunny">
+  <!-- Sky / Weather Particle Container -->
+  <div id="skyParticles" class="sky-particles" aria-hidden="true"></div>
+
+  <!-- Drifting Animal Crossing Balloon with Present -->
+  <div id="balloonPresent" class="balloon-wrapper" title="Click to pop with slingshot!">
+    <div class="balloon-content">
+      <img src="assets/balloon_present.jpg" alt="Animal Crossing Balloon Present" class="balloon-img" />
+      <span class="balloon-sparkle">✨</span>
+    </div>
+    <div class="balloon-hint">Tap with Slingshot! 🎯</div>
+  </div>
+
+  <!-- Top Island Status Bar -->
+  <header class="island-topbar ac-border-scalloped-bottom">
+    <div class="topbar-container">
+      <!-- Left: Clock & Weather -->
+      <div class="status-group">
+        <div class="island-clock-badge">
+          <span class="clock-icon">⏰</span>
+          <span id="islandClockTime">12:00 PM</span>
+          <span id="islandClockDate" class="clock-date">Mon, Sep 28</span>
+        </div>
+
+        <div class="weather-picker" title="Change Island Weather">
+          <button class="weather-btn active" data-weather="sunny" title="Sunny Weather">☀️ Sunny</button>
+          <button class="weather-btn" data-weather="blossom" title="Cherry Blossom Season">🌸 Petals</button>
+          <button class="weather-btn" data-weather="rain" title="Cozy Island Rain">🌧️ Rain</button>
+          <button class="weather-btn" data-weather="night" title="Starry Night / Shooting Stars">✨ Night</button>
+        </div>
+      </div>
+
+      <!-- Center: Island Crest -->
+      <div class="island-brand">
+        <span class="brand-leaf">🍃</span>
+        <h1 class="island-title" id="islandHeaderTitle">Cozy Haven Island</h1>
+        <span class="island-tagline">Resident Representative's Paradise</span>
+      </div>
+
+      <!-- Right: Nook Miles & Bells Counter + Music Toggle -->
+      <div class="status-group currency-group">
+        <div class="currency-pill nook-miles-pill" title="Nook Miles Balance">
+          <span class="currency-icon">✈️</span>
+          <span class="currency-amount" id="milesCount">25,800</span>
+          <span class="currency-label">Miles</span>
+        </div>
+
+        <div class="currency-pill bells-pill" title="Bells in Wallet">
+          <span class="currency-icon">💰</span>
+          <span class="currency-amount" id="bellsCount">99,999</span>
+          <span class="currency-label">Bells</span>
+        </div>
+
+        <button id="bgmToggleBtn" class="ac-icon-btn audio-btn" title="Toggle Island Acoustic BGM / Tune">
+          <span id="bgmIcon">🎵</span>
+          <span id="bgmLabel">Island BGM</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Island Grounds -->
+  <main class="island-main">
+    
+    <!-- Hero Section: Island Passport & Dialogue Box -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        
+        <!-- Left: Animal Crossing Resident Passport (With Stitched & Scalloped Borders) -->
+        <article class="passport-card ac-border-passport" id="passportCard">
+          <div class="passport-header">
+            <div class="passport-seal">
+              <span class="seal-icon">🍃</span>
+              <span class="seal-text">NOOK INC. PASSPORT</span>
+            </div>
+            <button id="editPassportBtn" class="passport-edit-btn" title="Edit Passport Details">
+              ✏️ Edit
+            </button>
+          </div>
+
+          <div class="passport-body">
+            <div class="passport-photo-frame ac-border-stitched">
+              <div class="photo-wrapper">
+                <img src="assets/resident_portrait.jpg" alt="Resident Representative" class="passport-avatar" id="passportAvatar">
+                <div class="photo-corner-stamp">🌸</div>
+              </div>
+              <div class="passport-name-badge">
+                <h2 class="villager-name" id="passportName">Honey</h2>
+                <span class="island-name-sub" id="passportIsland">Cozy Haven</span>
+              </div>
+            </div>
+
+            <div class="passport-details-list">
+              <div class="detail-row">
+                <span class="detail-label">Title:</span>
+                <span class="detail-value highlight" id="passportTitle">Full-Time Cutie & Procrastinator</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Native Fruit:</span>
+                <span class="detail-value" id="passportFruit">🍑 Sweet Peach</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Native Flower:</span>
+                <span class="detail-value" id="passportFlower">🌸 Pink Cosmos</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Birthday:</span>
+                <span class="detail-value" id="passportBirthday">🎂 Special Day</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Dream Address:</span>
+                <span class="detail-value font-mono">DA-5200-LOVE-4EVER</span>
+              </div>
+              <div class="detail-row comment-row">
+                <span class="detail-label">Passport Comment:</span>
+                <p class="passport-quote" id="passportComment">"If lost, please return to Nick with an iced latte and warm hugs!"</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="passport-footer ac-border-dashed-top">
+            <span class="stamp-verified">✨ 100% Island Royalty Approved</span>
+          </div>
+        </article>
+
+        <!-- Right: Animal Crossing Dialogue Box & Island Billboard Banner -->
+        <div class="dialogue-banner-column">
+          
+          <!-- Iconic Animal Crossing Dialogue Box with Nameplate Border -->
+          <div class="ac-dialogue-box ac-border-dialogue">
+            <div class="dialogue-nameplate">
+              <span class="nameplate-icon">💬</span>
+              <span class="nameplate-text" id="speakerName">Honey (Resident Rep)</span>
+            </div>
+            
+            <div class="dialogue-content">
+              <p id="dialogueText" class="dialogue-speech">
+                Welcome to my cozy personal island! Whether you're here to listen to some acoustic tunes, read my letters, or just relax under the peach trees... I hope your day is filled with 5-star island happiness!
+              </p>
+            </div>
+
+            <div class="dialogue-actions">
+              <button id="talkBtn" class="ac-btn ac-btn-green" title="Hear another cute message!">
+                <span>Next Dialogue 💬</span>
+              </button>
+              <button id="sendLoveBtn" class="ac-btn ac-btn-coral" title="Give love bells!">
+                <span>Send Love ❤️</span>
+              </button>
+            </div>
+            
+            <div class="dialogue-tail" aria-hidden="true"></div>
+            <div class="dialogue-bounce-indicator" aria-hidden="true">▼</div>
+          </div>
+
+          <!-- Island Scenic Banner with Wooden Log Border -->
+          <div class="scenic-banner-card ac-border-wood">
+            <div class="wood-corner wood-corner-tl"></div>
+            <div class="wood-corner wood-corner-tr"></div>
+            <div class="wood-corner wood-corner-bl"></div>
+            <div class="wood-corner wood-corner-br"></div>
+            
+            <div class="banner-image-container">
+              <img src="assets/island_hero.jpg" alt="Cozy Island Landscape" class="scenic-img">
+              <div class="scenic-overlay-tag">
+                <span>📍 Cozy Haven Town Square</span>
+              </div>
+            </div>
+            <div class="scenic-caption">
+              <span>Today's Island Tune: 🎵 "Bubblegum K.K. & Sweet Memories"</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- NookPhone App Grid Section (Stitched & Pastel Bezel Borders) -->
+    <section class="nookphone-section">
+      <div class="container">
+        
+        <div class="section-wood-header ac-border-wood-mini">
+          <div class="wood-pegs"></div>
+          <h2 class="section-title">
+            <span class="header-icon">📱</span> NookPhone Apps & Island Activities
+          </h2>
+          <span class="header-subtitle">Tap an app to explore her world!</span>
+        </div>
+
+        <div class="nook-apps-grid">
+          
+          <!-- App 1: Letters & Sweet Notes -->
+          <button class="nook-app-card ac-border-app app-coral" data-modal="modal-letters">
+            <div class="app-icon-bubble">
+              <span class="app-emoji">💌</span>
+              <span class="app-badge">New</span>
+            </div>
+            <h3 class="app-name">Love Letters</h3>
+            <p class="app-desc">Postcards from Nick & friends</p>
+          </button>
+
+          <!-- App 2: Nook Miles+ Stamp Card -->
+          <button class="nook-app-card ac-border-app app-teal" data-modal="modal-stamps">
+            <div class="app-icon-bubble">
+              <span class="app-emoji">🍃</span>
+              <span class="app-badge" id="stampsBadge">4/4</span>
+            </div>
+            <h3 class="app-name">Nook Miles+</h3>
+            <p class="app-desc">Daily cozy checklist & stamps</p>
+          </button>
+
+          <!-- App 3: Brewster's Roost & Jukebox -->
+          <button class="nook-app-card ac-border-app app-amber" data-modal="modal-cafe">
+            <div class="app-icon-bubble">
+              <span class="app-emoji">☕</span>
+              <span class="app-badge">Cozy</span>
+            </div>
+            <h3 class="app-name">The Roost</h3>
+            <p class="app-desc">Warm lattes & K.K. songs</p>
+          </button>
+
+          <!-- App 4: Critterpedia (Things She Loves) -->
+          <button class="nook-app-card ac-border-app app-green" data-modal="modal-critters">
+            <div class="app-icon-bubble">
+              <span class="app-emoji">🦋</span>
+              <span class="app-badge">Favs</span>
+            </div>
+            <h3 class="app-name">Favorites-pedia</h3>
+            <p class="app-desc">All the things that make her smile</p>
+          </button>
+
+          <!-- App 5: Island Photo Album -->
+          <button class="nook-app-card ac-border-app app-lavender" data-modal="modal-gallery">
+            <div class="app-icon-bubble">
+              <span class="app-emoji">📸</span>
+              <span class="app-badge">Polaroid</span>
+            </div>
+            <h3 class="app-name">Island Camera</h3>
+            <p class="app-desc">Snapshots & sweet memories</p>
+          </button>
+
+          <!-- App 6: Custom DIY Recipes -->
+          <button class="nook-app-card ac-border-app app-yellow" data-modal="modal-diy">
+            <div class="app-icon-bubble">
+              <span class="app-emoji">🔨</span>
+              <span class="app-badge">DIY</span>
+            </div>
+            <h3 class="app-name">DIY Recipes</h3>
+            <p class="app-desc">Recipes for a happy girlfriend</p>
+          </button>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Island Features: Daily Nook Miles+ Stamp Card Preview -->
+    <section class="stamp-interactive-section">
+      <div class="container">
+        <div class="stamp-card-frame ac-border-stitched-card">
+          <div class="stamp-card-header">
+            <div class="stamp-title-wrap">
+              <span class="stamp-leaf-logo">🍃</span>
+              <div>
+                <h3 class="stamp-heading">Daily Nook Miles+ Goals</h3>
+                <p class="stamp-sub">Tap a stamp slot to check off today's cozy accomplishment!</p>
+              </div>
+            </div>
+            <div class="miles-reward-badge">
+              <span>Bonus: +500 Miles</span>
+            </div>
+          </div>
+
+          <div class="stamp-slots-grid" id="stampSlotsGrid">
+            <!-- Stamp Slot 1 -->
+            <div class="stamp-slot stamped" data-slot="1" data-task="Drank a warm matcha latte 🍵">
+              <div class="slot-circle">
+                <span class="stamp-mark">🌸</span>
+              </div>
+              <span class="slot-text">Drink warm latte 🍵</span>
+              <span class="slot-reward">+150 Miles</span>
+            </div>
+
+            <!-- Stamp Slot 2 -->
+            <div class="stamp-slot stamped" data-slot="2" data-task="Gave Nick the sweetest cuddle 🥰">
+              <div class="slot-circle">
+                <span class="stamp-mark">❤️</span>
+              </div>
+              <span class="slot-text">Nick Cuddle Time 🥰</span>
+              <span class="slot-reward">+200 Miles</span>
+            </div>
+
+            <!-- Stamp Slot 3 -->
+            <div class="stamp-slot" data-slot="3" data-task="Stretched & had 8 hours of sweet sleep 💤">
+              <div class="slot-circle">
+                <span class="stamp-placeholder">Tap to Stamp!</span>
+              </div>
+              <span class="slot-text">Get 8hrs of sleep 💤</span>
+              <span class="slot-reward">+200 Miles</span>
+            </div>
+
+            <!-- Stamp Slot 4 -->
+            <div class="stamp-slot" data-slot="4" data-task="Did something that made you smile today ✨">
+              <div class="slot-circle">
+                <span class="stamp-placeholder">Tap to Stamp!</span>
+              </div>
+              <span class="slot-text">Smile at something cute ✨</span>
+              <span class="slot-reward">+300 Miles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wooden Island Bulletin Board with Pinned Notices -->
+    <section class="bulletin-section">
+      <div class="container">
+        
+        <div class="ac-bulletin-board ac-border-wood-board">
+          <!-- Little Yellow Bird on top of Bulletin Board -->
+          <div class="bulletin-bird" id="bulletinBird" title="Chirp chirp!">
+            <div class="bird-body">🐤</div>
+            <div class="bird-speech">Chirp! 🎵</div>
+          </div>
+
+          <div class="bulletin-roof">
+            <span class="board-title">ISLAND BULLETIN BOARD</span>
+          </div>
+
+          <div class="bulletin-notes-corkboard">
+            
+            <!-- Note 1: Nick's Announcement -->
+            <article class="cork-note note-yellow ac-border-note">
+              <div class="thumbtack thumbtack-red"></div>
+              <div class="note-date">Special Announcement 📢</div>
+              <h4 class="note-heading">To My Favorite Resident:</h4>
+              <p class="note-body">
+                Notice to all island residents! Honey is officially recognized as the prettiest, sweetest, and most wonderful person in the entire hemisphere!
+              </p>
+              <div class="note-signature">- Signed, Island Mayor Nick 💖</div>
+            </article>
+
+            <!-- Note 2: Island Weather Forecast -->
+            <article class="cork-note note-pink ac-border-note">
+              <div class="thumbtack thumbtack-blue"></div>
+              <div class="note-date">Weekly Forecast 🌤️</div>
+              <h4 class="note-heading">Peach Harvest Season</h4>
+              <p class="note-body">
+                Warm sunshine with high chances of iced drinks, cozy couch movies, and shooting stars over the cliffside tonight!
+              </p>
+              <div class="note-signature">- Nook Weather Bureau 🍃</div>
+            </article>
+
+            <!-- Note 3: Turnip Prices / Love Index -->
+            <article class="cork-note note-green ac-border-note">
+              <div class="thumbtack thumbtack-yellow"></div>
+              <div class="note-date">Market Watch 📈</div>
+              <h4 class="note-heading">Love Index Spike!</h4>
+              <p class="note-body">
+                Today's love exchange rate is at an all-time peak: 999,999 kisses per turnip! We recommend holding on for maximum snuggles.
+              </p>
+              <div class="note-signature">- Timmy & Tommy 🦝</div>
+            </article>
+
+          </div>
+
+          <div class="bulletin-footer">
+            <button id="addNoteBtn" class="ac-btn ac-btn-wood">
+              <span>📌 Pin a Sweet Note</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Animal Crossing Scalloped Wave Footer -->
+  <footer class="island-footer ac-border-scalloped-top">
+    <div class="container footer-content">
+      <div class="footer-leaf-icon">🍃</div>
+      <p class="footer-msg">Handcrafted with love for the most special girl in the world.</p>
+      <p class="footer-sub">Animal Crossing™ inspired personal sanctuary • Made by Nick</p>
+      <div class="footer-links">
+        <span class="footer-badge">Nintendo AC Style Borders</span>
+        <span class="footer-badge">Interactive Sound & Bells</span>
+        <span class="footer-badge">No Tom Nook Debt Included! ✨</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- Modal 1: Love Letters (Stationery with animal crossing wax seal) -->
+  <div id="modal-letters" class="ac-modal-backdrop" aria-hidden="true">
+    <div class="ac-modal-card ac-border-dialogue-modal">
+      <div class="modal-header-ribbon">
+        <span>💌 Island Post Office Stationery</span>
+        <button class="modal-close-btn" data-close>&times;</button>
+      </div>
+      <div class="modal-body letter-stationery ac-border-stitched">
+        <div class="letter-stamp-corner">🌸</div>
+        <h3 class="letter-greeting">Dearest Honey,</h3>
+        <p class="letter-text">
+          Just wanted to send you a quick letter from Dodo Airlines to remind you how much you mean to me. Even if we had an island full of Raymonds, Marshal, and Ankha, you'd still be my favorite villager of all time.
+        </p>
+        <p class="letter-text">
+          Thank you for making every day feel like a calm, cozy afternoon in Animal Crossing. I love you so much!
+        </p>
+        <div class="letter-signoff">
+          <span>Forever & always,</span>
+          <strong>Nick 💕</strong>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="ac-btn ac-btn-coral" data-close>Aww, Keep Letter Safe 💖</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Nook Miles+ Stamp Details -->
+  <div id="modal-stamps" class="ac-modal-backdrop" aria-hidden="true">
+    <div class="ac-modal-card ac-border-dialogue-modal">
+      <div class="modal-header-ribbon bg-teal">
+        <span>🍃 Nook Miles+ Program</span>
+        <button class="modal-close-btn" data-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-instruction">Complete cute everyday routines and punch stamps to earn infinite cozy miles!</p>
+        <ul class="miles-task-list">
+          <li class="task-item">
+            <span class="task-check">✅</span>
+            <div class="task-info">
+              <strong>Stay Hydrated:</strong> Drank plenty of water today!
+            </div>
+            <span class="task-pts">+100 Miles</span>
+          </li>
+          <li class="task-item">
+            <span class="task-check">✅</span>
+            <div class="task-info">
+              <strong>Cozy Snack:</strong> Had a delicious treat with zero guilt!
+            </div>
+            <span class="task-pts">+150 Miles</span>
+          </li>
+          <li class="task-item">
+            <span class="task-check">✅</span>
+            <div class="task-info">
+              <strong>Kind to Self:</strong> Remembered that you are doing amazing!
+            </div>
+            <span class="task-pts">+250 Miles</span>
+          </li>
+          <li class="task-item">
+            <span class="task-check">✅</span>
+            <div class="task-info">
+              <strong>Nick Appreciation:</strong> Gave or received warm snuggles!
+            </div>
+            <span class="task-pts">+500 Miles</span>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button class="ac-btn ac-btn-green" data-close>Yay! Claim Miles 🍃</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: The Roost Cafe & K.K. Slider Jukebox -->
+  <div id="modal-cafe" class="ac-modal-backdrop" aria-hidden="true">
+    <div class="ac-modal-card ac-border-dialogue-modal">
+      <div class="modal-header-ribbon bg-amber">
+        <span>☕ The Roost Cafe & Jukebox</span>
+        <button class="modal-close-btn" data-close>&times;</button>
+      </div>
+      <div class="modal-body cafe-layout">
+        <div class="cafe-portrait ac-border-wood-mini">
+          <img src="assets/brewster_cafe.jpg" alt="Brewster's Roost Coffee" class="cafe-img">
+          <span class="roost-tag">"Coo... Pigeon Milk included."</span>
+        </div>
+        <div class="cafe-controls">
+          <h4 class="cafe-title">K.K. Slider's Live Acoustic Set</h4>
+          <p class="cafe-desc">Sit back, take a sip of hot coffee, and enjoy cozy acoustic chimes.</p>
+          
+          <div class="jukebox-player ac-border-stitched">
+            <div class="track-info">
+              <span class="disc-spin" id="discSpin">💿</span>
+              <div>
+                <strong id="trackTitle">Bubblegum K.K. (Lullaby Chime)</strong>
+                <span class="track-artist">Performed by K.K. Slider & Nick</span>
+              </div>
+            </div>
+            <div class="player-buttons">
+              <button id="playTrackBtn" class="ac-btn ac-btn-green">▶ Play Song</button>
+              <button id="stopTrackBtn" class="ac-btn ac-btn-wood">⏹ Pause</button>
+              <button id="nextTrackBtn" class="ac-btn ac-btn-yellow">⏭ Next Track</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="ac-btn ac-btn-wood" data-close>Thank you, Brewster! ☕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Favorites-pedia -->
+  <div id="modal-critters" class="ac-modal-backdrop" aria-hidden="true">
+    <div class="ac-modal-card ac-border-dialogue-modal">
+      <div class="modal-header-ribbon bg-green">
+        <span>🦋 Favorites-pedia Collection</span>
+        <button class="modal-close-btn" data-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-instruction">A field guide to all of Honey's absolute favorite things!</p>
+        <div class="critter-grid">
+          <div class="critter-card ac-border-stitched">
+            <span class="critter-icon">🐱</span>
+            <div class="critter-meta">
+              <strong>Sweet Cats</strong>
+              <span class="critter-sub">Rarity: ★★★★★</span>
+              <p>Purring cuddle machines that rule the house.</p>
+            </div>
+          </div>
+          <div class="critter-card ac-border-stitched">
+            <span class="critter-icon">🍵</span>
+            <div class="critter-meta">
+              <strong>Iced Matcha Latte</strong>
+              <span class="critter-sub">Season: All Year Round</span>
+              <p>Oat milk + strawberry foam = instant happiness.</p>
+            </div>
+          </div>
+          <div class="critter-card ac-border-stitched">
+            <span class="critter-icon">🌸</span>
+            <div class="critter-meta">
+              <strong>Studio Ghibli & Cozy Movies</strong>
+              <span class="critter-sub">Location: Warm Blanket Fort</span>
+              <p>Totoro, Howl's Castle, and relaxing rainy day films.</p>
+            </div>
+          </div>
+          <div class="critter-card ac-border-stitched">
+            <span class="critter-icon">🥐</span>
+            <div class="critter-meta">
+              <strong>Bakery Pastries</strong>
+              <span class="critter-sub">Found: Morning Walks</span>
+              <p>Flaky almond croissants and cinnamon treats.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="ac-btn ac-btn-green" data-close>Close Critterpedia 📖</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Polaroid Island Photo Album -->
+  <div id="modal-gallery" class="ac-modal-backdrop" aria-hidden="true">
+    <div class="ac-modal-card ac-border-dialogue-modal">
+      <div class="modal-header-ribbon bg-lavender">
+        <span>📸 Island Memories Album</span>
+        <button class="modal-close-btn" data-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="polaroid-gallery">
+          <div class="polaroid-item">
+            <div class="polaroid-tape"></div>
+            <img src="assets/island_hero.jpg" alt="Island Sunrise" class="polaroid-img">
+            <span class="polaroid-caption">Sunny morning stroll on our island 🌿</span>
+          </div>
+          <div class="polaroid-item">
+            <div class="polaroid-tape tape-pink"></div>
+            <img src="assets/brewster_cafe.jpg" alt="Coffee at The Roost" class="polaroid-img">
+            <span class="polaroid-caption">Late night warm brew at Brewster's ☕</span>
+          </div>
+          <div class="polaroid-item">
+            <div class="polaroid-tape"></div>
+            <img src="assets/resident_portrait.jpg" alt="Portrait" class="polaroid-img">
+            <span class="polaroid-caption">The sweetest resident in existence 🌸</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="ac-btn ac-btn-coral" data-close>Save to Memory Album 💾</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: DIY Recipes -->
+  <div id="modal-diy" class="ac-modal-backdrop" aria-hidden="true">
+    <div class="ac-modal-card ac-border-dialogue-modal">
+      <div class="modal-header-ribbon bg-yellow">
+        <span>🔨 DIY Recipe Workbench</span>
+        <button class="modal-close-btn" data-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="diy-recipe-card ac-border-stitched">
+          <div class="diy-card-header">
+            <span class="diy-icon">📜</span>
+            <div>
+              <h4 class="diy-title">Recipe: Perfect Cozy Date Night</h4>
+              <span class="diy-type">Category: Warm Hearts</span>
+            </div>
+          </div>
+          <div class="diy-materials">
+            <h5>Materials Needed:</h5>
+            <ul>
+              <li>• 1x Fluffy blanket</li>
+              <li>• 2x Sweet iced drinks or hot cocoa</li>
+              <li>• Unlimited kisses & forehead touches</li>
+              <li>• 1x Movie or Animal Crossing island tour</li>
+            </ul>
+          </div>
+          <button id="craftRecipeBtn" class="ac-btn ac-btn-green diy-craft-btn">
+            🔨 Craft Date Night Now!
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="ac-btn ac-btn-wood" data-close>Done Crafting! ✨</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Balloon Present Mystery Prize Modal -->
+  <div id="modal-present" class="ac-modal-backdrop" aria-hidden="true">
+    <div class="ac-modal-card ac-border-dialogue-modal present-modal">
+      <div class="modal-header-ribbon bg-coral">
+        <span>🎁 Slingshot Balloon Mystery Gift!</span>
+        <button class="modal-close-btn" data-close>&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="present-box-anim">🎁✨</div>
+        <h3 class="present-unboxed-title">You Popped the Present!</h3>
+        <p class="present-unboxed-text" id="presentMessage">
+          "Inside the gift box you found: A Golden Coupon for 100 Unlimited Back Massages, Infinite Sweet Kisses, and Any Dessert You Want! Redeemable anytime with Nick!"
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="ac-btn ac-btn-coral" data-close>Put in Pocket & Squee! 💖</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Passport Modal -->
+  <div id="modal-edit-passport" class="ac-modal-backdrop" aria-hidden="true">
+    <div class="ac-modal-card ac-border-dialogue-modal">
+      <div class="modal-header-ribbon bg-teal">
+        <span>✏️ Nook Inc. Passport Office</span>
+        <button class="modal-close-btn" data-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="passportEditForm" class="edit-passport-form">
+          <label class="form-label">
+            Resident Representative Name:
+            <input type="text" id="editNameInput" class="ac-input" value="Honey" required maxlength="20">
+          </label>
+          <label class="form-label">
+            Island Name:
+            <input type="text" id="editIslandInput" class="ac-input" value="Cozy Haven" required maxlength="25">
+          </label>
+          <label class="form-label">
+            Island Title:
+            <input type="text" id="editTitleInput" class="ac-input" value="Full-Time Cutie & Procrastinator" maxlength="35">
+          </label>
+          <label class="form-label">
+            Native Fruit:
+            <select id="editFruitInput" class="ac-input">
+              <option value="🍑 Sweet Peach" selected>🍑 Sweet Peach</option>
+              <option value="🍎 Crisp Apple">🍎 Crisp Apple</option>
+              <option value="🍒 Sweet Cherry">🍒 Sweet Cherry</option>
+              <option value="🍊 Juicy Orange">🍊 Juicy Orange</option>
+              <option value="🍐 Golden Pear">🍐 Golden Pear</option>
+            </select>
+          </label>
+          <label class="form-label">
+            Passport Comment:
+            <textarea id="editCommentInput" class="ac-input" rows="2">"If lost, please return to Nick with an iced latte and warm hugs!"</textarea>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="ac-btn ac-btn-green">💾 Save Passport Stamp</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Love Hearts Canvas Animation Container -->
+  <div id="confettiContainer" class="confetti-container" aria-hidden="true"></div>
+
+  <!-- Audio elements & web audio logic in app.js -->
+  <script src="app.js"></script>
+</body>
+</html>

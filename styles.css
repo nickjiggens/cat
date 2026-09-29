@@ -1,0 +1,1799 @@
+/* ==========================================================================
+   ANIMAL CROSSING THEMED PERSONAL WEBSITE - STYLESHEET
+   Curated with authentic ACNH color palettes, custom borders, and animations.
+   ========================================================================== */
+
+:root {
+  /* Palette: Iconic Animal Crossing Colors */
+  --ac-grass-base: #5db952;
+  --ac-grass-dark: #4ea844;
+  --ac-grass-triangle: #429638;
+  --ac-cream-light: #fffdf5;
+  --ac-cream-card: #fcf8ec;
+  --ac-cream-border: #e9dec4;
+  --ac-dialogue-bg: #fffef0;
+  --ac-dialogue-rim: #d8c89d;
+  
+  /* Accents */
+  --ac-teal: #21b8a9;
+  --ac-teal-dark: #169386;
+  --ac-teal-light: #6ee7db;
+  --ac-coral: #ff7675;
+  --ac-coral-dark: #d63031;
+  --ac-pink: #ff9aa2;
+  --ac-pink-blossom: #ffccd5;
+  --ac-yellow: #feca57;
+  --ac-yellow-dark: #e67e22;
+  --ac-wood-light: #c8894a;
+  --ac-wood-mid: #9c602a;
+  --ac-wood-dark: #5c3514;
+  --ac-cork-bg: #e6c89c;
+  
+  /* Text */
+  --ac-text-dark: #4a3c31;
+  --ac-text-sub: #786655;
+  --ac-text-light: #ffffff;
+  
+  /* Shadows & Depth */
+  --ac-shadow-soft: 0 8px 24px rgba(60, 40, 20, 0.12);
+  --ac-shadow-card: 0 6px 0 rgba(70, 50, 30, 0.15), 0 12px 20px rgba(0, 0, 0, 0.08);
+  --ac-shadow-pop: 0 6px 0 #1b857a;
+
+  /* Typography */
+  --font-display: 'Fredoka', 'Varela Round', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ac-text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease;
+
+  /* Iconic Animal Crossing Triangle Grass Pattern */
+  background-color: var(--ac-grass-base);
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.25) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpolygon points='24,8 14,32 34,32' fill='%23469e3c' opacity='0.75'/%3E%3Cpolygon points='0,32 10,8 -10,8' fill='%23469e3c' opacity='0.75'/%3E%3Cpolygon points='48,32 58,8 38,8' fill='%23469e3c' opacity='0.75'/%3E%3C/svg%3E");
+  background-size: 100% 400px, 48px 48px;
+}
+
+/* Weather Themes on Body */
+body.weather-blossom {
+  background-color: #63bf5c;
+}
+body.weather-rain {
+  background-color: #488f57;
+  filter: contrast(0.95) brightness(0.9);
+}
+body.weather-night {
+  background-color: #1a3b34;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(30, 40, 75, 0.8) 0%, transparent 80%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpolygon points='24,8 14,32 34,32' fill='%23132e28' opacity='0.8'/%3E%3C/svg%3E");
+  color: #f7f3e8;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==========================================================================
+   SPECIAL ANIMAL CROSSING BORDERS & UI SYSTEMS
+   ========================================================================== */
+
+/* 1. AC DIALOGUE BOX BORDER (Cream bubble with nameplate & dialogue tail) */
+.ac-border-dialogue {
+  background: var(--ac-dialogue-bg);
+  border-radius: 28px;
+  border: 4px solid var(--ac-dialogue-rim);
+  box-shadow: 
+    0 0 0 4px #ffffff,
+    0 8px 0 rgba(70, 50, 20, 0.15),
+    0 16px 28px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 2. AC WOOD SIGNPOST / LOG BORDER */
+.ac-border-wood {
+  background: linear-gradient(135deg, #a86c35 0%, #854f21 50%, #6b3d16 100%);
+  border: 6px solid #4a290d;
+  outline: 3px solid #dca368;
+  border-radius: 22px;
+  box-shadow: 
+    inset 0 3px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.3),
+    0 8px 0 #3b200a,
+    0 16px 24px rgba(0, 0, 0, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wood corner screws / nails */
+.wood-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 35% 35%, #ffd27d 0%, #a6732e 60%, #4a290d 100%);
+  border-radius: 50%;
+  border: 1px solid #3d2008;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+  z-index: 3;
+}
+.wood-corner::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  right: 2px;
+  height: 2px;
+  background: #3d2008;
+  transform: translateY(-50%) rotate(45deg);
+}
+.wood-corner-tl { top: 8px; left: 8px; }
+.wood-corner-tr { top: 8px; right: 8px; }
+.wood-corner-bl { bottom: 8px; left: 8px; }
+.wood-corner-br { bottom: 8px; right: 8px; }
+
+/* 3. AC STITCHED SEWING FABRIC BORDER */
+.ac-border-stitched {
+  background: #fffef8;
+  border-radius: 20px;
+  border: 3px dashed #73b885;
+  box-shadow: 
+    0 0 0 4px #edf7ee,
+    0 4px 10px rgba(50, 80, 50, 0.08);
+  position: relative;
+}
+
+.ac-border-stitched-card {
+  background: #faf6ea;
+  border-radius: 26px;
+  border: 4px dashed #cca578;
+  outline: 4px solid #fffdf7;
+  box-shadow: var(--ac-shadow-card);
+  position: relative;
+}
+
+/* 4. AC PASSPORT CARD BORDER */
+.ac-border-passport {
+  background: #fdfaf0;
+  border-radius: 30px;
+  border: 4px solid #e2d6bc;
+  outline: 4px solid #ffffff;
+  box-shadow: 
+    0 8px 0 rgba(100, 75, 45, 0.15),
+    0 18px 30px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+/* 5. AC NOOKPHONE APP SQUIRCLE BORDER */
+.ac-border-app {
+  border-radius: 26px;
+  border: 4px solid #ffffff;
+  box-shadow: 
+    0 6px 0 rgba(50, 40, 30, 0.15),
+    0 12px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+.ac-border-app:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 
+    0 12px 0 rgba(50, 40, 30, 0.15),
+    0 20px 28px rgba(0, 0, 0, 0.15);
+}
+.ac-border-app:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 0 2px 0 rgba(50, 40, 30, 0.15);
+}
+
+/* 6. AC SCALLOPED CLOUD BORDERS (Dividers) */
+.ac-border-scalloped-bottom {
+  position: relative;
+}
+.ac-border-scalloped-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background-image: radial-gradient(circle at 12px 0px, var(--ac-cream-light) 12px, transparent 13px);
+  background-size: 24px 16px;
+  background-repeat: repeat-x;
+  z-index: 10;
+}
+
+.ac-border-scalloped-top {
+  position: relative;
+}
+.ac-border-scalloped-top::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background-image: radial-gradient(circle at 12px 16px, var(--ac-cream-light) 12px, transparent 13px);
+  background-size: 24px 16px;
+  background-repeat: repeat-x;
+  z-index: 10;
+}
+
+/* 7. AC BULLETIN CORKBOARD BORDER */
+.ac-border-wood-board {
+  background: var(--ac-cork-bg);
+  background-image: 
+    radial-gradient(#d8b788 15%, transparent 16%),
+    radial-gradient(#caa26e 15%, transparent 16%);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  border: 10px solid #854f21;
+  outline: 4px solid #4a290d;
+  border-radius: 24px;
+  box-shadow: 
+    inset 0 4px 10px rgba(0, 0, 0, 0.25),
+    0 10px 0 #3b200a,
+    0 20px 30px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+/* 8. AC WASHI TAPE & STICKY NOTE BORDER */
+.ac-border-note {
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ac-border-note:hover {
+  transform: translateY(-4px) rotate(0deg) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* ==========================================================================
+   TOP SKY BAR & ISLAND STATUS BAR
+   ========================================================================== */
+.island-topbar {
+  background: var(--ac-cream-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 12px 0 18px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.status-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Clock Badge */
+.island-clock-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #edf7eb;
+  border: 2px solid #a8dc9e;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2e682a;
+}
+.clock-date {
+  font-size: 0.8rem;
+  color: #5c8f58;
+  border-left: 2px solid #c2e8b9;
+  padding-left: 6px;
+}
+
+/* Weather Picker Buttons */
+.weather-picker {
+  display: flex;
+  gap: 4px;
+  background: #f1ebd8;
+  padding: 3px;
+  border-radius: 24px;
+  border: 1px solid #dfd4ba;
+}
+.weather-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 18px;
+  cursor: pointer;
+  color: var(--ac-text-sub);
+  transition: all 0.2s ease;
+}
+.weather-btn:hover {
+  color: var(--ac-text-dark);
+}
+.weather-btn.active {
+  background: #ffffff;
+  color: #21b8a9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Island Branding */
+.island-brand {
+  text-align: center;
+}
+.brand-leaf {
+  display: inline-block;
+  font-size: 1.4rem;
+  animation: leafWiggle 3s infinite ease-in-out;
+}
+@keyframes leafWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+.island-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2b7a32;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+.island-tagline {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #8c7865;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Currencies: Nook Miles & Bells */
+.currency-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: 2px solid;
+}
+.nook-miles-pill {
+  background: #e6f9f6;
+  border-color: #21b8a9;
+  color: #0f7a70;
+}
+.bells-pill {
+  background: #fff8e5;
+  border-color: #feca57;
+  color: #a46900;
+}
+.currency-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* Island BGM Button */
+.ac-icon-btn.audio-btn {
+  background: #f0f7ff;
+  border: 2px solid #70a1ff;
+  color: #1e62d0;
+  border-radius: 20px;
+  padding: 5px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.ac-icon-btn.audio-btn:hover {
+  background: #70a1ff;
+  color: #ffffff;
+  transform: scale(1.04);
+}
+.ac-icon-btn.audio-btn.playing {
+  background: #2ed573;
+  border-color: #26af5f;
+  color: #ffffff;
+  animation: pulseAudio 1.5s infinite;
+}
+@keyframes pulseAudio {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ==========================================================================
+   DRIFTING BALLOON PRESENT (Signature ACNH easter egg)
+   ========================================================================== */
+.balloon-wrapper {
+  position: fixed;
+  top: 130px;
+  left: -120px;
+  z-index: 999;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: driftAcross 36s linear infinite;
+  transition: transform 0.2s ease;
+}
+.balloon-wrapper:hover {
+  transform: scale(1.1);
+}
+.balloon-content {
+  position: relative;
+  width: 76px;
+  height: 95px;
+  animation: bobbing 3s ease-in-out infinite alternate;
+}
+.balloon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.25));
+}
+.balloon-sparkle {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  font-size: 1.2rem;
+  animation: sparkleTwinkle 1.2s infinite ease-in-out;
+}
+.balloon-hint {
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #ff7675;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #d63031;
+  margin-top: 4px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+@keyframes driftAcross {
+  0% { transform: translateX(0); left: -120px; }
+  100% { transform: translateX(calc(100vw + 240px)); left: -120px; }
+}
+@keyframes bobbing {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(-16px) rotate(3deg); }
+}
+@keyframes sparkleTwinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ==========================================================================
+   HERO SECTION: PASSPORT & DIALOGUE
+   ========================================================================== */
+.hero-section {
+  padding: 40px 0 20px 0;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 410px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* --- PASSPORT CARD --- */
+.passport-card {
+  padding: 24px;
+}
+.passport-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee4cd;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+.passport-seal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.seal-icon {
+  font-size: 1.3rem;
+  color: #21b8a9;
+}
+.seal-text {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #19877b;
+}
+.passport-edit-btn {
+  background: #eef7eb;
+  border: 2px solid #82cc78;
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #2b7a32;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.passport-edit-btn:hover {
+  background: #82cc78;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.passport-photo-frame {
+  padding: 12px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.photo-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+}
+.passport-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+.photo-corner-stamp {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  font-size: 1.2rem;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+.villager-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #3b2f27;
+  line-height: 1.1;
+}
+.island-name-sub {
+  display: inline-block;
+  background: #fbf0d8;
+  border-radius: 12px;
+  padding: 3px 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #8c683b;
+  margin-top: 4px;
+}
+
+.passport-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.92rem;
+  border-bottom: 1px dashed #ede2cd;
+  padding-bottom: 6px;
+}
+.detail-label {
+  font-weight: 700;
+  color: #857261;
+}
+.detail-value {
+  font-weight: 700;
+  color: #3a2e25;
+}
+.detail-value.highlight {
+  color: #21b8a9;
+}
+.font-mono {
+  font-family: 'Fredoka', monospace;
+  letter-spacing: 0.5px;
+}
+.comment-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border-bottom: none;
+  padding-top: 4px;
+}
+.passport-quote {
+  font-style: italic;
+  font-size: 0.88rem;
+  background: #fbf5e6;
+  border-left: 3px solid #ff7675;
+  padding: 6px 10px;
+  border-radius: 0 8px 8px 0;
+  color: #634f40;
+}
+
+.passport-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 2px dashed #e8dcc4;
+  text-align: center;
+}
+.stamp-verified {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ff7675;
+  letter-spacing: 0.5px;
+}
+
+/* --- RIGHT COLUMN: DIALOGUE BOX & SCENIC BANNER --- */
+.dialogue-banner-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ACNH Dialogue Box */
+.ac-dialogue-box {
+  padding: 30px 32px 24px 32px;
+}
+.dialogue-nameplate {
+  position: absolute;
+  top: -18px;
+  left: 28px;
+  background: var(--ac-teal);
+  border: 3px dashed rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 4px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 8px rgba(22, 147, 134, 0.35);
+  z-index: 5;
+}
+.nameplate-icon {
+  font-size: 1rem;
+}
+.nameplate-text {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.3px;
+}
+
+.dialogue-speech {
+  font-size: 1.18rem;
+  line-height: 1.6;
+  font-weight: 600;
+  color: #4a3c31;
+  min-height: 72px;
+  font-family: var(--font-body);
+}
+
+.dialogue-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 2px dashed #f0e6ce;
+}
+
+/* Dialogue Bubble Tail */
+.dialogue-tail {
+  position: absolute;
+  bottom: -20px;
+  left: 50px;
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 20px solid var(--ac-dialogue-bg);
+  filter: drop-shadow(0 4px 2px rgba(70, 50, 20, 0.15));
+}
+
+/* Bouncing Down Arrow */
+.dialogue-bounce-indicator {
+  position: absolute;
+  bottom: 12px;
+  right: 18px;
+  color: #ff7675;
+  font-size: 0.9rem;
+  animation: bounceArrow 0.9s infinite alternate ease-in-out;
+}
+@keyframes bounceArrow {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(6px); }
+}
+
+/* Scenic Banner Card */
+.scenic-banner-card {
+  padding: 10px;
+}
+.banner-image-container {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 240px;
+}
+.scenic-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.scenic-banner-card:hover .scenic-img {
+  transform: scale(1.03);
+}
+.scenic-overlay-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #854f21;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #5c3514;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.scenic-caption {
+  padding: 8px 12px 2px 12px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffeed9;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   BUTTON SYSTEM (Animal Crossing 3D Buttons)
+   ========================================================================== */
+.ac-btn {
+  border: 3px solid #ffffff;
+  border-radius: 22px;
+  padding: 9px 20px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+}
+.ac-btn:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.ac-btn-green {
+  background: #2ed573;
+  color: #ffffff;
+  box-shadow: 0 5px 0 #20a055, 0 8px 14px rgba(46, 213, 115, 0.3);
+}
+.ac-btn-green:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #20a055, 0 12px 18px rgba(46, 213, 115, 0.4);
+}
+
+.ac-btn-coral {
+  background: #ff7675;
+  color: #ffffff;
+  box-shadow: 0 5px 0 #d63031, 0 8px 14px rgba(255, 118, 117, 0.3);
+}
+.ac-btn-coral:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #d63031, 0 12px 18px rgba(255, 118, 117, 0.4);
+}
+
+.ac-btn-yellow {
+  background: #feca57;
+  color: #5c3514;
+  box-shadow: 0 5px 0 #d48b11, 0 8px 14px rgba(254, 202, 87, 0.35);
+}
+.ac-btn-yellow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #d48b11;
+}
+
+.ac-btn-wood {
+  background: #9c602a;
+  color: #fff9ed;
+  box-shadow: 0 5px 0 #5c3514, 0 8px 14px rgba(92, 53, 20, 0.35);
+}
+.ac-btn-wood:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #5c3514;
+}
+
+/* ==========================================================================
+   NOOKPHONE SECTION & APP ICONS
+   ========================================================================== */
+.nookphone-section {
+  padding: 40px 0 20px 0;
+}
+
+.section-wood-header {
+  background: linear-gradient(90deg, #9c602a, #b87538, #9c602a);
+  border: 4px solid #5c3514;
+  border-radius: 20px;
+  padding: 12px 24px;
+  text-align: center;
+  color: #fff9ee;
+  margin-bottom: 28px;
+  box-shadow: 0 5px 0 #422409, 0 10px 18px rgba(0, 0, 0, 0.15);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.section-subtitle {
+  font-size: 0.95rem;
+  color: #ffe6c7;
+  font-weight: 600;
+}
+
+.nook-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.nook-app-card {
+  padding: 24px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 4px solid #ffffff;
+}
+
+/* App Background Colors */
+.app-coral { background: #ffeaa7; color: #875a00; }
+.app-teal { background: #dff9fb; color: #138496; }
+.app-amber { background: #ffdfba; color: #885428; }
+.app-green { background: #def7e5; color: #218c47; }
+.app-lavender { background: #e8e3f9; color: #5f4b8b; }
+.app-yellow { background: #fff3bf; color: #8c7300; }
+
+.app-icon-bubble {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  background: #ffffff;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease;
+}
+.nook-app-card:hover .app-icon-bubble {
+  transform: scale(1.1) rotate(4deg);
+}
+.app-emoji {
+  font-size: 2.2rem;
+}
+.app-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: #ff7675;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 2px 7px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.app-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ac-text-dark);
+}
+.app-desc {
+  font-size: 0.82rem;
+  color: var(--ac-text-sub);
+  line-height: 1.3;
+}
+
+/* ==========================================================================
+   INTERACTIVE STAMP CARD (Nook Miles+)
+   ========================================================================== */
+.stamp-interactive-section {
+  padding: 24px 0 20px 0;
+}
+
+.stamp-card-frame {
+  padding: 28px;
+}
+.stamp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed #cca578;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.stamp-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stamp-leaf-logo {
+  font-size: 2.2rem;
+}
+.stamp-heading {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #5c3514;
+}
+.stamp-sub {
+  font-size: 0.9rem;
+  color: #8c6e4e;
+}
+.miles-reward-badge {
+  background: #21b8a9;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 3px 0 #13776d;
+}
+
+.stamp-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.stamp-slot {
+  background: #ffffff;
+  border: 3px solid #e5d3b6;
+  border-radius: 20px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.stamp-slot:hover {
+  transform: translateY(-4px);
+  border-color: #ff7675;
+}
+.slot-circle {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  border: 3px dashed #d5c09e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #faf6ea;
+  transition: all 0.3s ease;
+}
+.stamp-placeholder {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #a69176;
+}
+.slot-text {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #4a3829;
+}
+.slot-reward {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #21b8a9;
+}
+
+/* Stamped state */
+.stamp-slot.stamped {
+  background: #fff8f0;
+  border-color: #ff9aa2;
+}
+.stamp-slot.stamped .slot-circle {
+  background: #ffe3e3;
+  border: 3px solid #ff7675;
+  box-shadow: 0 0 12px rgba(255, 118, 117, 0.35);
+}
+.stamp-mark {
+  font-size: 2.2rem;
+  animation: stampPunch 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes stampPunch {
+  0% { transform: scale(2.5) rotate(-20deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* ==========================================================================
+   BULLETIN BOARD (Wood Frame & Corkboard Notes)
+   ========================================================================== */
+.bulletin-section {
+  padding: 40px 0 60px 0;
+}
+
+.ac-bulletin-board {
+  position: relative;
+  padding: 24px 28px;
+}
+
+/* Little Yellow Bird perched on top */
+.bulletin-bird {
+  position: absolute;
+  top: -42px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 10;
+  animation: birdBob 2s infinite ease-in-out;
+}
+.bird-body {
+  font-size: 2rem;
+}
+.bird-speech {
+  background: #ffffff;
+  border: 2px solid #5c3514;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #5c3514;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+@keyframes birdBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.bulletin-roof {
+  text-align: center;
+  border-bottom: 3px solid #6b3d16;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+.board-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #5c3514;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.bulletin-notes-corkboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  padding: 10px 0;
+}
+
+.cork-note {
+  padding: 24px 20px 20px 20px;
+  position: relative;
+}
+.note-yellow {
+  background: #fff9d2;
+  transform: rotate(-1.5deg);
+}
+.note-pink {
+  background: #ffe3e8;
+  transform: rotate(1.2deg);
+}
+.note-green {
+  background: #e4f7e5;
+  transform: rotate(-0.8deg);
+}
+
+/* Thumbtacks */
+.thumbtack {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+.thumbtack-red { background: #e74c3c; }
+.thumbtack-blue { background: #3498db; }
+.thumbtack-yellow { background: #f39c12; }
+
+.note-date {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #7d6b56;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.note-heading {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #4a3625;
+  margin-bottom: 8px;
+}
+.note-body {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #554232;
+  margin-bottom: 12px;
+}
+.note-signature {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #d63031;
+  text-align: right;
+}
+
+.bulletin-footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* ==========================================================================
+   FOOTER (Animal Crossing Beach / Wave End)
+   ========================================================================== */
+.island-footer {
+  background: var(--ac-cream-light);
+  padding: 48px 0 32px 0;
+  text-align: center;
+  margin-top: 30px;
+}
+.footer-leaf-icon {
+  font-size: 2.2rem;
+  color: #21b8a9;
+  margin-bottom: 8px;
+}
+.footer-msg {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #3b2d23;
+  margin-bottom: 4px;
+}
+.footer-sub {
+  font-size: 0.9rem;
+  color: #8c7664;
+  margin-bottom: 18px;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.footer-badge {
+  background: #f0ebe0;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #705e4d;
+}
+
+/* ==========================================================================
+   MODALS (Animal Crossing Dialogue Popups)
+   ========================================================================== */
+.ac-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(40, 30, 20, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+.ac-modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ac-modal-card {
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ac-modal-backdrop.active .ac-modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.ac-border-dialogue-modal {
+  background: #fffef2;
+  border-radius: 32px;
+  border: 5px solid #d8c89d;
+  box-shadow: 0 0 0 6px #ffffff, 0 16px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.modal-header-ribbon {
+  background: var(--ac-coral);
+  color: #ffffff;
+  padding: 14px 24px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px dashed rgba(255, 255, 255, 0.6);
+}
+.modal-header-ribbon.bg-teal { background: #21b8a9; }
+.modal-header-ribbon.bg-amber { background: #e67e22; }
+.modal-header-ribbon.bg-green { background: #27ae60; }
+.modal-header-ribbon.bg-lavender { background: #8e44ad; }
+.modal-header-ribbon.bg-yellow { background: #f39c12; }
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  font-size: 1.5rem;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.2s ease;
+}
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.modal-body {
+  padding: 24px;
+}
+.modal-footer {
+  padding: 16px 24px 24px 24px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 2px dashed #ede2cd;
+}
+
+/* Modal Content Variations */
+/* Letters */
+.letter-stationery {
+  padding: 28px 24px;
+  background: #fdfaf0;
+  position: relative;
+}
+.letter-stamp-corner {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 1.6rem;
+  background: #ffffff;
+  border: 2px dashed #ff7675;
+  border-radius: 8px;
+  padding: 2px 6px;
+}
+.letter-greeting {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: #d63031;
+  margin-bottom: 12px;
+}
+.letter-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #4a3625;
+  margin-bottom: 12px;
+}
+.letter-signoff {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: #d63031;
+}
+
+/* Miles Checklist */
+.miles-task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f6fcf8;
+  border: 2px solid #b7e8c6;
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+.task-info {
+  flex-grow: 1;
+  margin: 0 12px;
+  font-size: 0.95rem;
+}
+.task-pts {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #21b8a9;
+}
+
+/* The Roost & Cafe */
+.cafe-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.cafe-portrait {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 200px;
+}
+.cafe-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.roost-tag {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(30, 20, 10, 0.85);
+  color: #fff9e6;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+.cafe-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: #5c3514;
+  margin-bottom: 4px;
+}
+.cafe-desc {
+  font-size: 0.92rem;
+  color: #7d6550;
+  margin-bottom: 14px;
+}
+.jukebox-player {
+  padding: 16px;
+  background: #fffdf5;
+}
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.disc-spin {
+  font-size: 2.2rem;
+  animation: spinRecord 4s linear infinite;
+  display: inline-block;
+}
+@keyframes spinRecord {
+  100% { transform: rotate(360deg); }
+}
+.track-artist {
+  display: block;
+  font-size: 0.85rem;
+  color: #8c735d;
+}
+.player-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Favorites-pedia */
+.critter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+.critter-card {
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.critter-icon {
+  font-size: 2rem;
+}
+.critter-meta strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #2b7a32;
+}
+.critter-sub {
+  font-size: 0.75rem;
+  color: #f39c12;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+.critter-meta p {
+  font-size: 0.82rem;
+  color: #635345;
+  line-height: 1.3;
+}
+
+/* Polaroids */
+.polaroid-gallery {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.polaroid-item {
+  background: #ffffff;
+  padding: 10px 10px 24px 10px;
+  border-radius: 4px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  width: 155px;
+  position: relative;
+  text-align: center;
+}
+.polaroid-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 16px;
+  background: rgba(240, 225, 140, 0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.polaroid-tape.tape-pink {
+  background: rgba(255, 182, 193, 0.85);
+}
+.polaroid-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.polaroid-caption {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4a3c31;
+  margin-top: 8px;
+}
+
+/* DIY Workbench */
+.diy-recipe-card {
+  padding: 20px;
+}
+.diy-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.diy-icon {
+  font-size: 2.2rem;
+}
+.diy-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: #7b4b1a;
+}
+.diy-type {
+  font-size: 0.82rem;
+  color: #b5804d;
+}
+.diy-materials {
+  background: #faf6ea;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+.diy-materials h5 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: #5c3514;
+  margin-bottom: 6px;
+}
+.diy-materials ul {
+  list-style: none;
+  font-size: 0.9rem;
+  color: #4f3b2d;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.diy-craft-btn {
+  width: 100%;
+}
+
+/* Balloon Present Modal */
+.present-modal {
+  text-align: center;
+}
+.present-box-anim {
+  font-size: 4rem;
+  margin: 12px 0;
+  animation: bouncePresent 1s infinite alternate;
+}
+@keyframes bouncePresent {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-12px) scale(1.08); }
+}
+.present-unboxed-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: #d63031;
+  margin-bottom: 10px;
+}
+.present-unboxed-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #4a3625;
+  background: #fff8f0;
+  border: 2px dashed #ff9aa2;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+/* Edit Passport Form */
+.edit-passport-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.form-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a3c31;
+}
+.ac-input {
+  border: 2px solid #d5c8a8;
+  border-radius: 14px;
+  padding: 8px 14px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: #ffffff;
+  color: #3b2f27;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.ac-input:focus {
+  border-color: #21b8a9;
+  box-shadow: 0 0 0 3px rgba(33, 184, 169, 0.2);
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   WEATHER & CONFETTI PARTICLES
+   ========================================================================== */
+.sky-particles, .confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Blossom Petal Animation */
+.petal {
+  font-size: 1.2rem;
+  animation: fallPetal linear forwards;
+}
+@keyframes fallPetal {
+  0% {
+    transform: translate(0, -40px) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: 0.8; }
+  100% {
+    transform: translate(120px, 105vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Raindrop */
+.raindrop {
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(transparent, rgba(160, 220, 255, 0.7));
+  animation: fallRain linear forwards;
+}
+@keyframes fallRain {
+  0% { transform: translateY(-30px); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(105vh); opacity: 0; }
+}
+
+/* Night Stars */
+.star {
+  color: #ffeaa7;
+  animation: twinkleStar ease-in-out infinite alternate;
+}
+@keyframes twinkleStar {
+  0% { opacity: 0.2; transform: scale(0.7); }
+  100% { opacity: 1; transform: scale(1.3); }
+}
+
+/* Confetti Sparkles */
+.confetti-heart {
+  position: absolute;
+  animation: floatHeart 1.8s ease-out forwards;
+}
+@keyframes floatHeart {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ========================================================================== */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .passport-card {
+    max-width: 550px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .topbar-container {
+    justify-content: center;
+  }
+  .island-brand {
+    order: -1;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .status-group {
+    justify-content: center;
+    width: 100%;
+  }
+  .weather-picker {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .dialogue-speech {
+    font-size: 1.05rem;
+  }
+  .critter-grid {
+    grid-template-columns: 1fr;
+  }
+  .stamp-slots-grid {
+    grid-template-columns: 1fr;
+  }
+  .passport-photo-frame {
+    flex-direction: column;
+    text-align: center;
+  }
+}
